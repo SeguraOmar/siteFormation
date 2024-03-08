@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:3306
--- Généré le : mar. 05 mars 2024 à 15:48
+-- Généré le : ven. 08 mars 2024 à 17:33
 -- Version du serveur : 8.0.30
 -- Version de PHP : 8.1.10
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données : `siteformation`
+-- Base de données : `sitedeformation`
 --
 
 -- --------------------------------------------------------
@@ -29,8 +29,8 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `avis` (
   `ID_avis` int NOT NULL,
-  `Commentaire` varchar(255) DEFAULT NULL,
-  `Note` int DEFAULT NULL
+  `avis_commentaire` varchar(255) DEFAULT NULL,
+  `avis_note` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
@@ -41,8 +41,8 @@ CREATE TABLE `avis` (
 
 CREATE TABLE `catégorie` (
   `ID_categorie` int NOT NULL,
-  `Nom` varchar(50) DEFAULT NULL,
-  `Description` varchar(255) DEFAULT NULL
+  `categorie_nom` varchar(50) DEFAULT NULL,
+  `categorie_description` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
@@ -53,9 +53,9 @@ CREATE TABLE `catégorie` (
 
 CREATE TABLE `cours` (
   `ID_cours` int NOT NULL,
-  `Titre` varchar(50) DEFAULT NULL,
-  `Description` varchar(255) DEFAULT NULL,
-  `Prix` decimal(3,2) NOT NULL
+  `cours_titre` varchar(50) DEFAULT NULL,
+  `cours_description` varchar(255) DEFAULT NULL,
+  `cours_prix` decimal(5,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
@@ -66,9 +66,9 @@ CREATE TABLE `cours` (
 
 CREATE TABLE `instructeur` (
   `ID_instructeur` int NOT NULL,
-  `Nom` varchar(50) DEFAULT NULL,
-  `Prénom` varchar(50) DEFAULT NULL,
-  `Description` varchar(255) DEFAULT NULL
+  `instructeur_nom` varchar(50) DEFAULT NULL,
+  `instructeur_prenom` varchar(50) DEFAULT NULL,
+  `instructeur_description` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
@@ -123,10 +123,10 @@ CREATE TABLE `un_utilisateur_a_un_cours` (
 
 CREATE TABLE `utilisateur` (
   `ID_utilisateur` int NOT NULL,
-  `Nom` varchar(50) DEFAULT NULL,
-  `Prénom` varchar(50) DEFAULT NULL,
-  `Email` varchar(255) DEFAULT NULL,
-  `Mot_de_passe` varchar(255) DEFAULT NULL
+  `user_lastname` varchar(50) DEFAULT NULL,
+  `user_firstname` varchar(50) DEFAULT NULL,
+  `user_email` varchar(255) DEFAULT NULL,
+  `user_password` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
