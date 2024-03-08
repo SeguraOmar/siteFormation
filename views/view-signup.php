@@ -54,6 +54,7 @@
         </div>
 
         <button type="submit">Valider</button>
+        <a href="../controllers/controller-signin.php"><button type="button">Connexion</button></a>
 
 
     </form>
