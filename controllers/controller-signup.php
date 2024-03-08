@@ -22,17 +22,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Vérification de l'email 
+    // Ajout d'une condition pour qu'on ne puisse pas s'inscrire avec une adresse email déjà existante
+
     if (empty($_POST["user_email"])) {
         $errors["user_email"] = "L'email est obligatoire.";
     } else if (!filter_var($_POST["user_email"], FILTER_VALIDATE_EMAIL)) {
         $errors["user_email"] = "L'email n'est pas valide.";
-    } 
+    }  else if (Utilisateur::findByEmail($_POST["user_email"])) {
+        $errors["user_email"] = "L'email est déjà utilisé.";
+    }
 
     // Vérification du mot de passe 
-    if (empty($_POST["user_password"])) {
-        $errors["user_password"] = "Le mot de passe est obligatoire.";
-    } else if (strlen($_POST["user_password"]) < 8) {
-        $errors["user_password"] = "Le mot de passe doit contenir au moins 8 caractères.";
+    $user_password = $_POST["user_password"];
+    $confirm_password = $_POST["confirm_password"];
+    if (empty($user_password) || strlen($user_password) < 8 || $user_password !== $confirm_password) {
+        $errors['user_password'] = "Le mot de passe doit comporter au moins 8 caractères et correspondre.";
     }
 
     if (empty($errors)) {

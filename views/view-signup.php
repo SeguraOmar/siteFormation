@@ -44,6 +44,15 @@
             </span>
         </div>
 
+
+        <div>
+            <label for="confirm_password">Confirmer le mot de passe :</label>
+            <input id="confirm_password" type="password" name="confirm_password" class="validate">
+            <span>
+                <?= isset($errors['confirm_password']) ? $errors['confirm_password'] : '' ?>
+            </span>
+        </div>
+
         <button type="submit">Valider</button>
 
 
