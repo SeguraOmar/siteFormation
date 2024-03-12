@@ -34,6 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 unset($_SESSION["user"]["user_password"]);
                 // Si la validation du mot de passe est réussie, redirection vers controller-home.php
                 header('Location: controller-home.php');
+                exit;
             } else {
                 // Sinon, ajout d'une erreur de connexion au tableau d'erreurs
                 $errors['connexion'] = 'Mauvais mot de passe';

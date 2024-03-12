@@ -25,6 +25,7 @@
                 <input id="user_password" type="password" name="user_password" class="border border-gray-300 rounded-md p-2 w-full">
                 <span class="text-red-500">
                     <?= isset($errors['user_password']) ? $errors['user_password'] : '' ?>
+                    <?= isset($errors['connexion']) ? $errors['connexion'] : ''  ?>
                 </span>
             </div>
         
