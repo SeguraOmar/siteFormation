@@ -24,10 +24,24 @@
         </div>
     </nav>
 
-    <!-- En dessous de la navbar je met une image avec une div à gauche de l'image avec du texte dessus -->
-    <div class="w-10/12 h-1/2 mx-auto flex justify-center items-center">
-        <img src="../assets/image/IA.jpg" alt="Image d'IA">
+    <div class="carousel bg-gray-200 p-4 relative">
+        <!-- Bouton précédent -->
+        <button id="prevBtn" class="absolute top-1/2 left-0 transform -translate-y-1/2 bg-white px-2 py-1 rounded-full shadow-md z-10">Previous</button>
+        <!-- Bouton suivant -->
+        <button id="nextBtn" class="absolute top-1/2 right-0 transform -translate-y-1/2 bg-white px-2 py-1 rounded-full shadow-md z-10">Next</button>
+
+        <!-- Slide 1 -->
+        <div class="slide">
+            <img src="../assets/image/IA.jpg" alt="Image 1">
+        </div>
+        <!-- Slide 2 -->
+        <div class="slide hidden">
+            <img src="../assets/image/AI.jpg" alt="Image 2">
+        </div>
     </div>
+
+
+
 
 
 </body>
