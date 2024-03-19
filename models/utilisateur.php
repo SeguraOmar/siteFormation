@@ -121,7 +121,33 @@ public static function findByEmail(string $user_email): bool
             echo 'Erreur : ' . $e->getMessage();
             die();
         }
-    }   
+    }  
+    
+    public static function deleteUser(int $ID_utilisateur) {
+        try {
+            // Création de l'objet PDO pour la connexion à la BDD
+            $db = new PDO('mysql:host=localhost;dbname=' . DB_NAME, DB_USER, DB_PASS);
+
+            // Paramétrage des erreurs PDO pour les afficher en cas de problème
+            $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+            // Requête SQL pour supprimer un utilisateur
+            $sql = "DELETE FROM `utilisateur` WHERE `ID_utilisateur` = :ID_utilisateur";
+
+            // Préparation de la requête pour éviter les injections SQL 
+            $query = $db->prepare($sql);
+
+            // On relie les paramètres à nos marqueurs nominatifs à l'aide d'un bindValue 
+            $query->bindValue(':ID_utilisateur', $ID_utilisateur, PDO::PARAM_INT);
+
+            // Execution de la requête 
+            $query->execute();
+        } catch (PDOException $e) {
+            echo 'Erreur : ' . $e->getMessage();
+            die();
+        }
+    }
+    
 }
 
 ?>
