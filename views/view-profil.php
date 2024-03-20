@@ -31,6 +31,41 @@
     
     <div class="w-1/3 p-6 bg-white shadow-md rounded-lg mx-auto mt-24">
         <h2 class="text-2xl text-center">Profil de <?= $nom, ' ', $prenom ?></h2>
+     <!-- Rajouter un input avec le prénom -->
+        <form action="controller-profil.php" method="POST" novalidate>
+            <div class="mb-4">
+                <label for="user_firstname" class="block text-gray-700">Prénom :</label>
+                <input id="user_firstname" type="text" name="user_firstname" class="border border-gray-300 rounded-md p-3 w-full" value="<?= isset($_POST['user_firstname']) ? htmlspecialchars($_POST['user_firstname']) : $prenom ?>">
+                <span class="text-red-500">
+                    <?= isset($errors['user_firstname']) ? $errors['user_firstname'] : '' ?>
+                </span>
+            </div>
+            <!-- Rajouter un input avec le nom -->
+            <div class="mb-4">
+                <label for="user_lastname" class="block text-gray-700">Nom :</label>
+                <input id="user_lastname" type="text" name="user_lastname" class="border border-gray-300 rounded-md p-3 w-full" value="<?= isset($_POST['user_lastname']) ? htmlspecialchars($_POST['user_lastname']) : $nom ?>">
+                <span class="text-red-500">
+                    <?= isset($errors['user_lastname']) ? $errors['user_lastname'] : '' ?>
+                </span>
+            </div>
+            <!-- Rajouter un input avec l'email -->
+            <div class="mb-4">
+                <label for="user_email" class="block text-gray-700">Email :</label>
+                <input id="user_email" type="email" name="user_email" class="border border-gray-300 rounded-md p-3 w-full" value="<?= isset($_POST['user_email']) ? htmlspecialchars($_POST['user_email']) : $email ?>">
+                <span class="text-red-500">
+                    <?= isset($errors['user_email']) ? $errors['user_email'] : '' ?>
+                </span>
+            </div>
+
+        
+            <div class="flex justify-center">
+                <button type="submit" name="modifier" value="modifier" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-8 rounded">Modifier</button>
+            </div>
+        </form>
+        <form action="controller-profil.php" method="POST" novalidate>
+            <div class="flex justify-center">
+                <button type="submit" name="delete" value="delete" class="bg-red-500 hover:bg-red-700 text
+        
     </div>
 
 

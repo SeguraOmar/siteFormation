@@ -147,6 +147,36 @@ public static function findByEmail(string $user_email): bool
             die();
         }
     }
+
+    // Ajouter la méthode modifier 
+    public static function modifier(int $ID_utilisateur, string $user_lastname, string $user_firstname, string $user_email, string $user_description) {
+        try {
+            // Création de l'objet PDO pour la connexion à la BDD
+            $db = new PDO('mysql:host=localhost;dbname=' . DB_NAME, DB_USER, DB_PASS);
+
+            // Paramétrage des erreurs PDO pour les afficher en cas de problème
+            $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+            // Requête SQL pour modifier un utilisateur
+            $sql = "UPDATE `utilisateur` SET `user_lastname` = :user_lastname, `user_firstname` = :user_firstname, `user_email` = :user_email, `user_description` = :user_description WHERE `ID_utilisateur` = :ID_utilisateur";
+
+            // Préparation de la requête pour éviter les injections SQL 
+            $query = $db->prepare($sql);
+
+            // On relie les paramètres à nos marqueurs nominatifs à l'aide d'un bindValue 
+            $query->bindValue(':ID_utilisateur', $ID_utilisateur, PDO::PARAM_INT);
+            $query->bindValue(':user_lastname', htmlspecialchars($user_lastname), PDO::PARAM_STR);
+            $query->bindValue(':user_firstname', htmlspecialchars($user_firstname), PDO::PARAM_STR);
+            $query->bindValue(':user_email', htmlspecialchars($user_email), PDO::PARAM_STR);
+            $query->bindValue(':user_description', htmlspecialchars($user_description), PDO::PARAM_STR);
+
+            // Execution de la requête 
+            $query->execute();
+        } catch (PDOException $e) {
+            echo 'Erreur : ' . $e->getMessage();
+            die();
+        }
+    }
     
 }
 

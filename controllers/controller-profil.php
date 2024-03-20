@@ -17,6 +17,7 @@ if (isset($_SESSION['user'])) {
     $prenom = $_SESSION['user']['user_firstname'];
     $nom = $_SESSION['user']['user_lastname'];
     $email = $_SESSION['user']['user_email'];
+    $description = $_SESSION['user']['user_description'];
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
