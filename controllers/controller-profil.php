@@ -12,18 +12,18 @@ if (!isset($_SESSION['user'])) {
     exit();
 }
 
-if (isset($_SESSION['user'])) {
-    $ID_utilisateur = $_SESSION['user']['ID_utilisateur'];
-    $prenom = $_SESSION['user']['user_firstname'];
-    $nom = $_SESSION['user']['user_lastname'];
-    $email = $_SESSION['user']['user_email'];
-    $description = $_SESSION['user']['user_description'];
-}
+// Récupérer les informations de l'utilisateur depuis la session
+$user = $_SESSION['user'];
+
+$nom = $user['user_lastname'];
+$prenom = $user['user_firstname'];
+$email = $user['user_email'];
+$description = $user['user_description'];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['delete']) && $_POST['delete'] === 'delete') {
         // Supprimer l'utilisateur
-        Utilisateur::deleteUser($_SESSION['user']['ID_utilisateur']);
+        Utilisateur::deleteUser($user['ID_utilisateur']);
         
         // Déconnecter l'utilisateur en supprimant les données de session
         unset($_SESSION['user']);
@@ -32,20 +32,40 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         header('Location: controller-home.php');
         exit();
     }
+
+    if (isset($_POST['modifier']) && $_POST['modifier'] === 'modifier') {
+        $user_photo = isset($_FILES['user_photo']) ? $_FILES['user_photo']['name'] : null;
+
+        // Mettre à jour les champs modifiés
+        $user['user_lastname'] = $_POST['user_lastname'] ?? $user['user_lastname'];
+        $user['user_firstname'] = $_POST['user_firstname'] ?? $user['user_firstname'];
+        $user['user_email'] = $_POST['user_email'] ?? $user['user_email'];
+        $user['user_description'] = $_POST['user_description'] ?? $user['user_description'];
+
+        // Mettre à jour la photo de profil si une nouvelle photo est téléchargée
+        if (!empty($user_photo)) {
+            $user['user_photo'] = $user_photo;
+        }
+
+        // Mettre à jour l'utilisateur dans la session
+        $_SESSION['user'] = $user;
+
+        // Modifier l'utilisateur dans la base de données
+        Utilisateur::modifier(
+            $user['ID_utilisateur'],
+            $user['user_lastname'],
+            $user['user_firstname'],
+            $user['user_email'],
+            $user['user_description'],
+            $user['user_photo']
+        );
+        
+        // Rediriger vers la page de profil
+        header('Location: controller-profil.php');
+        exit();
+    }
 }
 
 // Si l'utilisateur est toujours connecté, inclure la vue du profil
 include_once '../views/view-profil.php';
 ?>
-
-
-
-
-
-
-
-
-
-
-
-

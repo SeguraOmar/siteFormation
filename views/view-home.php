@@ -13,7 +13,7 @@
         <nav class="shadow-2xl">
             <div class="flex items-center justify-between px-4 py-2">
                 <!-- Texte à gauche -->
-                <span class="text-2xl text-green-500 font-bold mr-2 font-mono">Wizpe<span class="text-blue-500">e</span></span>
+                <span class="text-2xl text-green-500 font-bold mr-2 font-mono">Fredd<span class="text-blue-500">y</span></span>
 
 
                 <div class="flex items-center">

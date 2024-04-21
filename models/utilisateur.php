@@ -149,7 +149,7 @@ public static function findByEmail(string $user_email): bool
     }
 
     // Ajouter la méthode modifier 
-    public static function modifier(int $ID_utilisateur, string $user_lastname, string $user_firstname, string $user_email, string $user_description) {
+    public static function modifier(int $ID_utilisateur, string $user_lastname, string $user_firstname, string $user_email, string $user_description, string $user_photo) {
         try {
             // Création de l'objet PDO pour la connexion à la BDD
             $db = new PDO('mysql:host=localhost;dbname=' . DB_NAME, DB_USER, DB_PASS);
@@ -158,7 +158,7 @@ public static function findByEmail(string $user_email): bool
             $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
             // Requête SQL pour modifier un utilisateur
-            $sql = "UPDATE `utilisateur` SET `user_lastname` = :user_lastname, `user_firstname` = :user_firstname, `user_email` = :user_email, `user_description` = :user_description WHERE `ID_utilisateur` = :ID_utilisateur";
+            $sql = "UPDATE `utilisateur` SET `user_lastname` = :user_lastname, `user_firstname` = :user_firstname, `user_email` = :user_email, `user_description` = :user_description, `user_photo` = :user_photo WHERE `ID_utilisateur` = :ID_utilisateur";
 
             // Préparation de la requête pour éviter les injections SQL 
             $query = $db->prepare($sql);
@@ -169,6 +169,7 @@ public static function findByEmail(string $user_email): bool
             $query->bindValue(':user_firstname', htmlspecialchars($user_firstname), PDO::PARAM_STR);
             $query->bindValue(':user_email', htmlspecialchars($user_email), PDO::PARAM_STR);
             $query->bindValue(':user_description', htmlspecialchars($user_description), PDO::PARAM_STR);
+            $query->bindValue(':user_photo', htmlspecialchars($user_photo), PDO::PARAM_STR);
 
             // Execution de la requête 
             $query->execute();
